@@ -2357,7 +2357,7 @@ fun CircleToSearchScreen(
                                                     val fileName = "selection_${java.util.UUID.randomUUID()}.png"
                                                     val path = ImageUtils.saveBitmap(context, selectedBitmap!!, fileName)
                                                     val file = java.io.File(path)
-                                                    val uri = androidx.core.content.FileProvider.getUriForFile(context, "com.akslabs.circletosearch.fileprovider", file)
+                                                    val uri = androidx.core.content.FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
                                                     val shareIntent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
                                                         type = "image/png"
                                                         putExtra(android.content.Intent.EXTRA_STREAM, uri)

@@ -55,7 +55,7 @@ fun searchWithGoogleLens(uri: Uri, context: Context): LensLaunchResult {
 
                 FileProvider.getUriForFile(
                     context,
-                    "com.akslabs.circletosearch.fileprovider",
+                    "${context.packageName}.fileprovider",
                     file
                 )
             } catch (e: Exception) {

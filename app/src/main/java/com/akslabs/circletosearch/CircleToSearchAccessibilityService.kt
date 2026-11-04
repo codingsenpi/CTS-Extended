@@ -1667,7 +1667,7 @@ class CircleToSearchAccessibilityService : AccessibilityService() {
                 val fileName = "share_pin_${java.util.UUID.randomUUID()}.png"
                 val path = ImageUtils.saveBitmap(this@CircleToSearchAccessibilityService, bitmap, fileName)
                 val file = java.io.File(path)
-                val uri = androidx.core.content.FileProvider.getUriForFile(this@CircleToSearchAccessibilityService, "com.akslabs.circletosearch.fileprovider", file)
+                val uri = androidx.core.content.FileProvider.getUriForFile(this@CircleToSearchAccessibilityService, "${packageName}.fileprovider", file)
                 val shareIntent = Intent(Intent.ACTION_SEND).apply {
                     type = "image/png"
                     putExtra(Intent.EXTRA_STREAM, uri)
