@@ -44,6 +44,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
+            android:excludeFromRecents="true"
             android:theme="@style/Theme.CircleToSearch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,6 +57,7 @@
             android:name=".ui.wobblepulldown.WobbleHomeDemoActivity"
             android:exported="false"
             android:label="Wobble Home"
+            android:excludeFromRecents="true"
             android:theme="@style/Theme.CircleToSearch" />
 
         <!-- Assist entry point: lets assist intents (long-press home on builds that
@@ -104,6 +106,7 @@
             android:name=".ui.wobblepulldown.WobbleDeviceInfoActivity"
             android:exported="false"
             android:label="App Info"
+            android:excludeFromRecents="true"
             android:theme="@style/Theme.CircleToSearch.Transparent" />
 
         <service
@@ -168,6 +171,7 @@
             android:name=".TriggerReceiver"
             android:exported="true">
             <intent-filter>
+                <action android:name="com.codingsenpi.ctsextended.action.TRIGGER_SEARCH" />
                 <action android:name="com.akslabs.circletosearch.action.TRIGGER_SEARCH" />
             </intent-filter>
         </receiver>
@@ -185,7 +189,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.akslabs.circletosearch.fileprovider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
