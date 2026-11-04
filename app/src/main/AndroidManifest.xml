@@ -66,7 +66,8 @@
             android:name=".AssistEntryActivity"
             android:exported="true"
             android:excludeFromRecents="true"
-            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:launchMode="singleInstance"
             android:theme="@style/Theme.CircleToSearch.Transparent">
             <!-- Assist entry point: lets assist intents (long-press home on builds that
                  route assist through an activity, the ASSIST key, voice-assist
@@ -161,6 +162,15 @@
             android:excludeFromRecents="true"
             android:taskAffinity=""
             android:launchMode="singleInstance" />
+
+        <!-- Background trigger receiver: accepts broadcast triggers from companion bridges -->
+        <receiver
+            android:name=".TriggerReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.akslabs.circletosearch.action.TRIGGER_SEARCH" />
+            </intent-filter>
+        </receiver>
 
         <service
             android:name=".CircleToSearchTileService"

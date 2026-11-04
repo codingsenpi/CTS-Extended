@@ -44,3 +44,18 @@
 # Ignore missing okhttp3 classes since OkHttp is not included as a dependency.
 -dontwarn okhttp3.**
 
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+# JNA: native code looks up methods/fields reflectively via initIDs
+-dontwarn java.awt.*
+-dontwarn com.sun.jna.**
+-keep class com.sun.jna.** { *; }
+-keepclassmembers class * extends com.sun.jna.** { *; }
+-keep class * implements com.sun.jna.** { *; }
+
+# uniffi-generated bindings
+-keep class uniffi.** { *; }
+
+

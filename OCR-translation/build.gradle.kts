@@ -79,12 +79,21 @@ fun jniLibAbiDir(abi: String) = File(jniLibsRootDir, abi)
 
 // Short, space-free cargo home + target dir: absolute host paths get baked
 // into ninja object dirs (260-char Windows limit), so both must stay short.
-val shortCargoHome = "C:/cgo"
-val shortCargoTargetDir = "C:/ct"
+val hostOs =
+    when {
+        org.gradle.internal.os.OperatingSystem.current().isWindows -> "windows-x86_64"
+        org.gradle.internal.os.OperatingSystem.current().isMacOsX -> "darwin-x86_64"
+        else -> "linux-x86_64"
+    }
 
-val ndkLlvmPrebuiltFw = "$ndkDir/toolchains/llvm/prebuilt/windows-x86_64".replace('\\', '/')
+val shortCargoHome =
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows) "C:/cgo" else "${System.getProperty("user.home")}/.cargo"
+val shortCargoTargetDir =
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows) "C:/ct" else bindingsBindgenRootDir.resolve("target").absolutePath
+
+val ndkLlvmPrebuiltFw = "$ndkDir/toolchains/llvm/prebuilt/$hostOs".replace('\\', '/')
 val ndkClangIncludeFw =
-    fileTree("$ndkDir/toolchains/llvm/prebuilt/windows-x86_64") {
+    fileTree("$ndkDir/toolchains/llvm/prebuilt/$hostOs") {
         include("lib/clang/*/include/stddef.h")
     }.files.firstOrNull()?.parent?.replace('\\', '/')
         ?: error("clang include dir not found under $ndkDir")
@@ -109,12 +118,6 @@ fun clangRtLib(abi: String): String {
             "x86" -> "i686-android"
             "x86_64" -> "x86_64-android"
             else -> error("Unknown abi $abi")
-        }
-    val hostOs =
-        when {
-            org.gradle.internal.os.OperatingSystem.current().isWindows -> "windows-x86_64"
-            org.gradle.internal.os.OperatingSystem.current().isMacOsX -> "darwin-x86_64"
-            else -> "linux-x86_64"
         }
     val hits =
         fileTree("$ndkDir/toolchains/llvm/prebuilt/$hostOs") {
@@ -180,6 +183,10 @@ val abiToBindingsTask =
         tasks.register("buildBindings$taskSuffix") {
             group = "build"
             description = "Build Rust bindings library for $abi"
+            onlyIf {
+                !File(jniLibAbiDir(abi), "libbindings.so").exists() ||
+                !File(jniLibAbiDir(abi), "libc++_shared.so").exists()
+            }
             inputs.file(bindingsRootDir.resolve("Cargo.toml"))
             inputs.file(bindingsRootDir.resolve("Cargo.lock"))
             inputs.file(bindingsRootDir.resolve(".cargo/config.toml"))
@@ -264,6 +271,7 @@ val buildUniffiBindgen =
         group = "build"
         description = "Build the host uniffi-bindgen binary"
         workingDir = bindingsBindgenRootDir
+        onlyIf { !bindgenHostBinary.exists() }
         environment("CARGO_HOME", shortCargoHome)
         inputs.file(bindingsBindgenRootDir.resolve("Cargo.toml"))
         inputs.dir(bindingsBindgenRootDir.resolve("src"))

@@ -95,6 +95,14 @@ class AssistEntryActivity : Activity() {
             }
         }
 
+        // Assistant session unavailable: immediately use accessibility capture if active
+        if (shot == null && CircleToSearchAccessibilityService.instance != null) {
+            android.util.Log.d("CircleToSearchAssist", "Voice service not bound, triggering accessibility capture directly")
+            CircleToSearchAccessibilityService.triggerCapture()
+            finish()
+            return
+        }
+
         // The gesture app may have started this process fresh: the system binds the
         // voice interaction service slightly later, so retry before giving up.
         if (attempt < VOICE_SERVICE_RETRIES) {
