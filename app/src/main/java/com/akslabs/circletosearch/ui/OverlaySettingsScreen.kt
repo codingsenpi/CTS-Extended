@@ -24,6 +24,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material3.*
@@ -600,7 +601,20 @@ private fun AboutSettingsScreen(onBack: () -> Unit) {
                 subtitle = stringResource(R.string.about_source_subtitle),
                 onClick = {
                     try {
-                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/aks-labs")))
+                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/codingsenpi/CTS-Extended")))
+                    } catch (e: Exception) {
+                        android.widget.Toast.makeText(context, context.getString(R.string.toast_could_not_open_link), android.widget.Toast.LENGTH_SHORT).show()
+                    }
+                }
+            )
+            SettingsGroupDivider()
+            SettingsLinkRow(
+                icon = Icons.Default.Info,
+                title = stringResource(R.string.about_credits_title),
+                subtitle = stringResource(R.string.about_credits_subtitle),
+                onClick = {
+                    try {
+                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/AKS-Labs/CircleToSearch")))
                     } catch (e: Exception) {
                         android.widget.Toast.makeText(context, context.getString(R.string.toast_could_not_open_link), android.widget.Toast.LENGTH_SHORT).show()
                     }

@@ -263,7 +263,7 @@ fun MoreAppsBottomSheet(
                         title = stringResource(R.string.app_name_circle_to_search_entry),
                         subtitle = stringResource(R.string.app_desc_circle_to_search_entry),
                         isFoss = true,
-                        onClick = { onAppSelected("https://github.com/AKS-Labs/CircleToSearch") }
+                        onClick = { onAppSelected("https://github.com/codingsenpi/CTS-Extended") }
                     )
 
                     AppItemWithDrawable(
@@ -384,7 +384,7 @@ fun DonateBottomSheet(
                         icon = Icons.Default.Code,
                         title = stringResource(R.string.donate_github_sponsors),
                         subtitle = stringResource(R.string.donate_github_sponsors_subtitle),
-                        onClick = { onDonateOptionSelected("https://github.com/sponsors/AKS-Labs") }
+                        onClick = { onDonateOptionSelected("https://github.com/sponsors/codingsenpi") }
                     )
 
                     val clipboardManager = LocalClipboardManager.current
@@ -393,8 +393,8 @@ fun DonateBottomSheet(
                         title = stringResource(R.string.donate_upi),
                         subtitle = stringResource(R.string.donate_upi_subtitle),
                         onClick = {
-                            clipboardManager.setText(AnnotatedString("akslabs@upi"))
-                            onDonateOptionSelected("upi://pay?pa=akslabs@upi&pn=AKS-Labs&cu=INR")
+                            clipboardManager.setText(AnnotatedString("codingsenpi@okaxis"))
+                            onDonateOptionSelected("upi://pay?pa=codingsenpi@okaxis&pn=codingsenpi&cu=INR")
                         }
                     )
 
@@ -402,7 +402,7 @@ fun DonateBottomSheet(
                         icon = Icons.Default.Payment,
                         title = stringResource(R.string.donate_paypal),
                         subtitle = stringResource(R.string.donate_paypal_subtitle),
-                        onClick = { onDonateOptionSelected("https://paypal.me/akslabsOfficial") }
+                        onClick = { onDonateOptionSelected("https://paypal.me/codingsenpi") }
                     )
                 }
             }

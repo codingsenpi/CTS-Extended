@@ -43,6 +43,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.filled.Code
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.rounded.Accessibility
 import androidx.compose.material.icons.rounded.Apps
 import androidx.compose.material.icons.rounded.Assistant
@@ -103,7 +104,8 @@ import com.akslabs.circletosearch.ui.components.AccessibilityDisclosureDialog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-private const val GITHUB_URL = "https://github.com/aks-labs"
+private const val GITHUB_URL = "https://github.com/codingsenpi/CTS-Extended"
+private const val UPSTREAM_GITHUB_URL = "https://github.com/AKS-Labs/CircleToSearch"
 private const val MAX_PULL_PX = 160f
 private const val PULL_HAPTIC_PX = 120f
 
@@ -521,6 +523,39 @@ fun WobbleAppInfoScreen(
                         }
                         Text(
                             text = stringResource(R.string.about_source_subtitle),
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.SemiBold,
+                            color = MaterialTheme.colorScheme.onSurface,
+                        )
+                    }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(8.dp))
+                            .clickable { openLink(context, UPSTREAM_GITHUB_URL) }
+                            .padding(vertical = 2.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.weight(1f),
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Info,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.size(18.dp),
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = stringResource(R.string.about_credits_title),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                        Text(
+                            text = "AKS-Labs",
                             style = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.SemiBold,
                             color = MaterialTheme.colorScheme.onSurface,

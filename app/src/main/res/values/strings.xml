@@ -1,4 +1,4 @@
-﻿<!--
+<!--
   ~ /*
   ~  * Copyright (C) 2025 AKS-Labs (original author)
   ~  *
@@ -18,7 +18,7 @@
   -->
 
 <resources>
-    <string name="app_name">CircleToSearch</string>
+    <string name="app_name">CTS Extended</string>
 
     <!-- General -->
     <string name="settings">Settings</string>
@@ -220,7 +220,7 @@
     <string name="section_choose_payment">CHOOSE PAYMENT METHOD</string>
     <string name="donate_github_sponsors">GitHub Sponsors</string>
     <string name="donate_github_sponsors_subtitle">Little to no fees</string>
-    <string name="donate_upi">UPI (India) akslabs@upi</string>
+    <string name="donate_upi">UPI (India) codingsenpi@okaxis</string>
     <string name="donate_upi_subtitle">Instant \u2022 No fees \u2022 Pay via UPI</string>
     <string name="donate_paypal">PayPal</string>
     <string name="donate_paypal_subtitle" formatted="false">Fixed fee up to 5% \u2022 Conversion loss \u2248 5% per dollar</string>
@@ -280,7 +280,7 @@
 
     <!-- Support / Donate Dialog -->
     <string name="support_title">Help Keep This Project Alive! \u2764\uFE0F</string>
-    <string name="support_body">If you like CircleToSearch and want to support its development, please consider donating. Your support will help me dedicate more time and resources to this project and help make it even better. Thank you for your support!</string>
+    <string name="support_body">If you like CTS-Extended and want to support its ongoing development, please consider donating. Your support will help dedicate more time and resources to this project. Thank you!</string>
 
     <!-- Friendly Messages -->
     <string name="friendly_msg_1">Ready when you are, boss. What\'s the mission today? &#x1F575;&#xFE0F;&#x200D;&#x2642;&#xFE0F;&#x1F602;</string>
@@ -373,7 +373,9 @@
     <string name="section_behavior">BEHAVIOR</string>
     <string name="about_version">Version</string>
     <string name="about_source_code">Source code</string>
-    <string name="about_source_subtitle">github.com/aks-labs</string>
+    <string name="about_source_subtitle">github.com/codingsenpi/CTS-Extended</string>
+    <string name="about_credits_title">Original author</string>
+    <string name="about_credits_subtitle">AKS-Labs (CircleToSearch)</string>
     <string name="about_donate_subtitle">Support ongoing development</string>
     <string name="wizard_title">Grant permissions to get started</string>
     <string name="wizard_hint">Grant any one to continue</string>
@@ -416,7 +418,7 @@
     <string name="info_build">Build</string>
     <string name="info_build_debug">Debug</string>
     <string name="info_build_release">Release</string>
-    <string name="info_made_by_akslabs">Made by AKS Labs</string>
+    <string name="info_made_by_akslabs">Original: AKS-Labs • Forked by codingsenpi as CTS-Extended</string>
     <string name="trigger_name_statusbar">Status bar</string>
     <string name="trigger_name_bubble">Bubble</string>
     <string name="trigger_name_assistant">Home button</string>
