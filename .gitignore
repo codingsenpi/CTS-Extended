@@ -19,4 +19,6 @@ C:\Users\ashin\AndroidStudioProjects\CircleToSearch\logs.md
 *.apk
 *.aab
 *.dm
+*.keystore
+*.jks
 /app/release/

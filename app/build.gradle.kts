@@ -32,33 +32,21 @@ android {
     signingConfigs {
         create("release") {
             val ksFile = System.getenv("KEYSTORE_FILE")
-            if (ksFile != null) {
+            if (!ksFile.isNullOrBlank() && file(ksFile).exists()) {
                 storeFile = file(ksFile)
                 storePassword = System.getenv("KEYSTORE_PASSWORD")
                 keyAlias = System.getenv("KEY_ALIAS")
                 keyPassword = System.getenv("KEY_PASSWORD")
-            } else {
-                // Local fallback: sign with the standard debug keystore so a
-                // plain `assembleRelease` still produces an installable APK
-                // for size/perf validation. CI overrides via KEYSTORE_* env.
-                val debugKeystore =
-                    file("${System.getProperty("user.home")}/.android/debug.keystore")
-                if (debugKeystore.exists()) {
-                    storeFile = debugKeystore
-                    storePassword = "android"
-                    keyAlias = "androiddebugkey"
-                    keyPassword = "android"
-                }
             }
         }
     }
 
     defaultConfig {
-        applicationId = "com.akslabs.circletosearch"
+        applicationId = "com.codingsenpi.ctsextended"
         minSdk = 29
         targetSdk = 36
-        versionCode = 7
-        versionName = "0.5"
+        versionCode = 8
+        versionName = "0.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
@@ -90,14 +78,6 @@ android {
         }
     }
 
-    splits {
-        abi {
-            isEnable = true
-            reset()
-            include("arm64-v8a", "armeabi-v7a")
-            isUniversalApk = false
-        }
-    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -130,22 +110,6 @@ android {
     }
 }
 
-// ABI-specific version codes for F-Droid and multi-APK support
-// arm64-v8a gets a higher code than armeabi-v7a so it's prioritized on compatible devices
-androidComponents {
-    onVariants { variant ->
-        val abiCodes = mapOf("armeabi-v7a" to 1, "arm64-v8a" to 2)
-        variant.outputs.forEach { output ->
-            val abi = output.filters.find { 
-                it.filterType == com.android.build.api.variant.FilterConfiguration.FilterType.ABI 
-            }?.identifier
-            if (abi != null) {
-                val baseCode = android.defaultConfig.versionCode ?: 0
-                output.versionCode.set(baseCode * 10 + (abiCodes[abi] ?: 0))
-            }
-        }
-    }
-}
 
 dependencies {
     implementation(project(":OCR-translation"))
